@@ -1,3 +1,7 @@
+// number guessing game
+// Parameters:
+//  maxTries: maximum number of tries
+//  maxNumber: maximum number to guess
 func guessingGame(maxTries: Int = 5, maxNumber: Int = 100){
     let randomNumber = Int.random(in: 1...maxNumber)
     var guessed: Bool = false
@@ -5,7 +9,7 @@ func guessingGame(maxTries: Int = 5, maxNumber: Int = 100){
 
     while !guessed && tries < maxTries {
         print("Guess a number between 1 and \(maxNumber): \n")
-        guard let guess = Int(readLine() ?? "") else {
+        guard let guess = Int(readLine() ?? ""), guess >= 1, guess <= maxNumber else {
             print("Please enter a valid number.")
             continue
         }
@@ -22,25 +26,21 @@ func guessingGame(maxTries: Int = 5, maxNumber: Int = 100){
         // Int() converts a string to an integer
         // it returns an optional integer
 
-        while tries < maxTries {
         if guess == randomNumber {
-            print("You guessed the number! It's \(randomNumber)!")
+            print("You guessed the number on guess number \(tries)! It's \(randomNumber)!")
             guessed = true
             break
         } else if guess < randomNumber {
             print("Higher!")
             tries += 1
-            break
         } else {
             print("Lower!")
             tries += 1
-            break
         }
     }
-}
     if !guessed {
         print("You ran out of tries! The number was \(randomNumber).")
     }
 }
 
-guessingGame(maxTries: 3)
+guessingGame(maxTries: 9)
