@@ -12,11 +12,17 @@ if let name = optionalName {
 }
 print("\(greeting)")
 
-let nickName: String? = nil
+let nickName: String? = "johnny"
 var fullName: String = "John Appleseed"
 var informalGreeting = "Hi \(nickName ?? fullName)"
 // if nickName is nil, then use fullName
 print(informalGreeting)
+
+// or we can also unwrap the value like this
+if let nickName {
+    print("hey, \(nickName), i'm calling you shortly")
+}
+// if nickName exists, this is called
 
 let individualScores = [75, 43, 103, 87, 12]
 // an int array
