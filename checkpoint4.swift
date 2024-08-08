@@ -1,34 +1,29 @@
-enum PasswordError: Error {
-    case short, obvious
+import Foundation
+
+enum NumberErrors: Error {
+    case OutOfBounds, NoRoot
 }
 
-func checkPassword(_ password: String) throws -> String {
-    if password.count < 5 {
-        throw PasswordError.short
+func getSquareRoot(number: Int) throws -> String {
+    if number < 1 || number > 10_000 {
+        throw NumberErrors.OutOfBounds
     }
 
-    if password == "12345" {
-        throw PasswordError.obvious
+    let toGetRoot = Double(number)
+    let result = sqrt(toGetRoot)
+
+    if result.isNaN {
+        throw NumberErrors.NoRoot
     }
 
-    if password.count < 8 {
-        return "Okay"
-       } else if password.count < 10 {
-           return "Good"
-       } else {
-           return "Excellent"
-       }
+    return String(result)
 }
-
-let myString: String = "12345"
-let thisShouldWork: String = "123456"
 
 do {
-    let result = try checkPassword(myString)
-    print("Password rating: \(result)")
-} catch {
-    print("There was an error")
-    let newResult: String = try checkPassword(thisShouldWork)
-    print("Other password's rating: \(newResult)")
-}
+    let numberWePass: Int = 300;
+    let toPrint = try getSquareRoot(number: numberWePass)
 
+    print("the square root of \(numberWePass) is: \(toPrint)")   
+} catch {
+    print("There was an error.")
+}
